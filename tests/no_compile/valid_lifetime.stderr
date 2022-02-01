@@ -1,0 +1,11 @@
+error[E0505]: cannot move out of `value` because it is borrowed
+  --> tests/no_compile/valid_lifetime.rs:12:10
+   |
+6  |         unsafe { RawMemoryRef::new(&value).into_inner_with_length(std::mem::size_of::<i32>()) };
+   |                                    ------ borrow of `value` occurs here
+...
+12 |     drop(value);
+   |          ^^^^^ move out of `value` occurs here
+...
+15 |     assert_eq!(boxed.allocated_bytes(), vec![5u8, 0, 0, 0]);
+   |                ----------------------- borrow later used here
